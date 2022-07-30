@@ -12,7 +12,7 @@ import Message from '../components/Message'
 
 const ProductScreen = () => {
 
-  const [qty, setQty] = useState(0)
+  const [qty, setQty] = useState(1)
 
   const dispatch = useDispatch()
   const productDetail = useSelector(state => state.productDetail)
@@ -26,7 +26,7 @@ const ProductScreen = () => {
   }, [dispatch, id])
 
   const addToCartHandler = () => {
-    navigate(`/cart/${id}?qty${qty}`)
+    navigate(`/cart/${id}?qty=${qty}`)
   }
 
   return (
