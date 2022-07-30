@@ -1,4 +1,4 @@
-import { addItem } from "../slicers/cartSlice";
+import { addItem, removeItem } from "../slicers/cartSlice";
 import axios from "axios";
 
 export const addToCart = (id, qty) => async (dispatch, getState) => {
@@ -13,7 +13,10 @@ export const addToCart = (id, qty) => async (dispatch, getState) => {
   }
   dispatch(addItem(cartItem))
 
-  console.log(cartItem)
-  
   localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
+}
+
+export const removeFromCart = (id) => (dispatch, getState) => {
+  dispatch(removeItem(id))
+  localStorage.setItem('cartItems',JSON.stringify(getState().cart.cartItems))
 }
