@@ -5,6 +5,7 @@ import productsSlice from './slicers/productsSlice';
 import cartSlice from './slicers/cartSlice';
 import userLoginSlice from './slicers/userLoginSlice';
 import userRegisterSlice from './slicers/userRegisterSlice';
+import userDetailsSlice from './slicers/userDetailsSlice';
 const middleware = [thunk]
 
 const store = configureStore({
@@ -13,7 +14,8 @@ const store = configureStore({
     productDetail: productDetailSlice,
     cart: cartSlice,
     userLogin: userLoginSlice,
-    userRegister: userRegisterSlice
+    userRegister: userRegisterSlice,
+    userDetails: userDetailsSlice
   },
   preloadedState: {},
   middleware

@@ -2,9 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const userRegisterSlice = createSlice({
   name: 'userRegister',
-  initialState: {
-    userRegister:{}
-  },
+  initialState: {},
   reducers: {
     register_request: (state, action) => {
       return { loading: true }
