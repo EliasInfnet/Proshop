@@ -1,4 +1,4 @@
-import { addItem, removeItem } from "../slicers/cartSlice";
+import { addItem, removeItem } from "../reducers/cartReducers/cartSlice";
 import axios from "axios";
 
 export const addToCart = (id, qty) => async (dispatch, getState) => {

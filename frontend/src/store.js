@@ -1,11 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 import thunk from 'redux-thunk';
-import productDetailSlice from './slicers/productDetailSlice';
-import productsSlice from './slicers/productsSlice';
-import cartSlice from './slicers/cartSlice';
-import userLoginSlice from './slicers/userLoginSlice';
-import userRegisterSlice from './slicers/userRegisterSlice';
-import userDetailsSlice from './slicers/userDetailsSlice';
+import productDetailSlice from './reducers/userReducers/userDetailsSlice';
+import productsSlice from './reducers/productReducers/productsSlice';
+import cartSlice from './reducers/cartReducers/cartSlice';
+import userLoginSlice from './reducers/userReducers/userLoginSlice';
+import userRegisterSlice from './reducers/userReducers/userRegisterSlice';
+import userDetailsSlice from './reducers/userReducers/userDetailsSlice';
+import userUpdateProfileSlice from './reducers/userReducers/userUpdateSlice';
 const middleware = [thunk]
 
 const store = configureStore({
@@ -15,7 +16,8 @@ const store = configureStore({
     cart: cartSlice,
     userLogin: userLoginSlice,
     userRegister: userRegisterSlice,
-    userDetails: userDetailsSlice
+    userDetails: userDetailsSlice,
+    userUpdate: userUpdateProfileSlice
   },
   preloadedState: {},
   middleware

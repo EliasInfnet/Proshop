@@ -1,4 +1,4 @@
-import { request, success, fail } from "../slicers/productsSlice"
+import { request, success, fail } from "../reducers/productReducers/productsSlice"
 import axios from "axios"
 
 export const listProducts = () => async (dispatch) => {

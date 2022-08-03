@@ -4,7 +4,8 @@ import { Form, Button, Row, Col } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { getUserDetails } from '../actions/userActions'
+import { getUserDetails, updateUserProfile } from '../actions/userActions'
+import { update_profile_reset } from '../reducers/userReducers/userUpdateSlice'
 
 const ProfileScreen = () => {
 
@@ -15,26 +16,30 @@ const ProfileScreen = () => {
   const [message, setMessage] = useState(null)
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const userDetails = useSelector(state => state.userDetails)
   const { user, loading, error } = userDetails
 
   const userLogin = useSelector(state => state.userLogin)
   const { userInfo } = userLogin
 
-  const navigate = useNavigate()
+  const userUpdateProfile = useSelector(state => state.userUpdate)
+  const { success } = userUpdateProfile
+
 
   useEffect(() => {
     if (!userInfo) {
       navigate('/login')
     } else {
-      if (!user.name) {
+      if (!user || !user.name || success) {
+        dispatch(update_profile_reset())
         dispatch(getUserDetails('profile'))
       } else {
         setName(user.name)
         setEmail(user.email)
       }
     }
-  }, [dispatch, userInfo, navigate, user])
+  }, [dispatch, userInfo, navigate, user, success])
 
 
   const submitHandler = (e) => {
@@ -42,7 +47,7 @@ const ProfileScreen = () => {
     if (password !== confirmPassword) {
       setMessage('Password do not match')
     } else {
-      //DISPATCH UPDATE
+      dispatch(updateUserProfile({ id: user._id, name, email, password }))
     }
   }
 
@@ -52,6 +57,7 @@ const ProfileScreen = () => {
         <h2>User Profile</h2>
         {message && <Message variant='danger'>{message}</Message>}
         {error && <Message variant='danger'>{error}</Message>}
+        {success && <Message variant='success'>Profile Updated</Message>}
         {loading && <Loader />}
         <Form onSubmit={submitHandler}>
           <Form.Group controlId='name'>

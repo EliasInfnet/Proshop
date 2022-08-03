@@ -1,7 +1,8 @@
-import { login_fail, login_request, login_success, logout as logoutSlice } from "../slicers/userLoginSlice"
-import { register_request, register_success, register_fail } from "../slicers/userRegisterSlice"
-import { details_fail, details_request, details_success } from "../slicers/userDetailsSlice"
+import { login_fail, login_request, login_success, logout as logoutSlice } from "../reducers/userReducers/userLoginSlice"
+import { register_request, register_success, register_fail } from "../reducers/userReducers/userRegisterSlice"
+import { details_fail, details_request, details_success } from "../reducers/userReducers/userDetailsSlice"
 import axios from 'axios'
+import { update_profile_fail, update_profile_request, update_profile_success } from "../reducers/userReducers/userUpdateSlice"
 
 export const login = (email, password) => async (dispatch) => {
   try {
@@ -93,5 +94,38 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
       err.response.data.message :
       err.message
     dispatch(details_fail(error))
+  }
+}
+
+export const updateUserProfile = (user) => async (dispatch, getState) => {
+  try {
+    dispatch(update_profile_request())
+
+    const { userLogin: { userInfo } } = getState()
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`
+      }
+    }
+
+    const { data } = await axios.put(
+      `/api/users/profile`,
+      user,
+      config
+    )
+
+    dispatch(update_profile_success(data))
+    dispatch(login_success(data))
+
+    localStorage.setItem('userInfo', JSON.stringify(data))
+
+  } catch (err) {
+    const error = err.response &&
+      err.response.data.message ?
+      err.response.data.message :
+      err.message
+    dispatch(update_profile_fail(error))
   }
 }
