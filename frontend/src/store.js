@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 import thunk from 'redux-thunk';
-import productDetailSlice from './reducers/userReducers/userDetailsSlice';
+import productDetailSlice from './reducers/productReducers/productDetailSlice';
 import productsSlice from './reducers/productReducers/productsSlice';
 import cartSlice from './reducers/cartReducers/cartSlice';
 import userLoginSlice from './reducers/userReducers/userLoginSlice';

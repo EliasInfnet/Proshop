@@ -1,4 +1,4 @@
-import { addItem, removeItem } from "../reducers/cartReducers/cartSlice";
+import { addItem, removeItem, save_shipping_address } from "../reducers/cartReducers/cartSlice";
 import axios from "axios";
 
 export const addToCart = (id, qty) => async (dispatch, getState) => {
@@ -19,4 +19,9 @@ export const addToCart = (id, qty) => async (dispatch, getState) => {
 export const removeFromCart = (id) => (dispatch, getState) => {
   dispatch(removeItem(id))
   localStorage.setItem('cartItems',JSON.stringify(getState().cart.cartItems))
+}
+
+export const saveShippingAddress = (data) => (dispatch) => {
+  dispatch(save_shipping_address(data))
+  localStorage.setItem('shippingAddress',JSON.stringify(data))
 }
