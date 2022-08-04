@@ -7,6 +7,7 @@ import userLoginSlice from './reducers/userReducers/userLoginSlice';
 import userRegisterSlice from './reducers/userReducers/userRegisterSlice';
 import userDetailsSlice from './reducers/userReducers/userDetailsSlice';
 import userUpdateProfileSlice from './reducers/userReducers/userUpdateSlice';
+import orderCreateSlice from './reducers/orderReducers/orderCreateSlice';
 const middleware = [thunk]
 
 const store = configureStore({
@@ -17,7 +18,8 @@ const store = configureStore({
     userLogin: userLoginSlice,
     userRegister: userRegisterSlice,
     userDetails: userDetailsSlice,
-    userUpdate: userUpdateProfileSlice
+    userUpdate: userUpdateProfileSlice,
+    orderCreate: orderCreateSlice
   },
   preloadedState: {},
   middleware
