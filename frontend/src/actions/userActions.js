@@ -1,8 +1,9 @@
 import { login_fail, login_request, login_success, logout as logoutSlice } from "../reducers/userReducers/userLoginSlice"
 import { register_request, register_success, register_fail } from "../reducers/userReducers/userRegisterSlice"
-import { details_fail, details_request, details_success } from "../reducers/userReducers/userDetailsSlice"
-import axios from 'axios'
+import { details_fail, details_request, details_success, details_reset } from "../reducers/userReducers/userDetailsSlice"
+import { order_list_my_reset } from "../reducers/orderReducers/orderListMySlice"
 import { update_profile_fail, update_profile_request, update_profile_success } from "../reducers/userReducers/userUpdateSlice"
+import axios from 'axios'
 
 export const login = (email, password) => async (dispatch) => {
   try {
@@ -36,6 +37,8 @@ export const login = (email, password) => async (dispatch) => {
 export const logout = () => async (dispatch) => {
   localStorage.removeItem('userInfo')
   dispatch(logoutSlice())
+  dispatch(order_list_my_reset())
+  dispatch(details_reset())
 }
 
 export const register = (name, email, password) => async (dispatch) => {

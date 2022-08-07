@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const userDetailsSlice = createSlice({
   name: 'userDetails',
   initialState: {
-    user:{}
+    user: {}
   },
   reducers: {
     details_request: (state, action) => {
@@ -14,10 +14,13 @@ export const userDetailsSlice = createSlice({
     },
     details_fail: (state, action) => {
       return { loading: false, error: action.payload }
+    },
+    details_reset: (state, action) => {
+      return { user: {} }
     }
   }
 })
 
-export const { details_request, details_success, details_fail, } = userDetailsSlice.actions
+export const { details_request, details_success, details_fail, details_reset } = userDetailsSlice.actions
 
 export default userDetailsSlice.reducer
