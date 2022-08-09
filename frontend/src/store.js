@@ -14,12 +14,14 @@ import orderDetailsSlice from './reducers/orderReducers/orderDetailsSlice';
 import orderPaySlice from './reducers/orderReducers/orderPaySlice';
 import orderListMySlice from './reducers/orderReducers/orderListMySlice';
 import userDeleteSlice from './reducers/userReducers/userDeleteSlice';
+import productDeleteSlice from './reducers/productReducers/productDeleteSlice';
 const middleware = [thunk]
 
 const store = configureStore({
   reducer: {
     productList: productsSlice,
     productDetail: productDetailSlice,
+    productDelete: productDeleteSlice,
     cart: cartSlice,
     userLogin: userLoginSlice,
     userRegister: userRegisterSlice,

@@ -6,18 +6,26 @@ import { useSelector, useDispatch } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import FormContainter from '../components/FormContainter'
-import { listProducts } from '../actions/productActions'
+import { listProducts, deleteProduct } from '../actions/productActions'
 
 const ProductListScreen = () => {
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
+  const userLogin = useSelector(state => state.userLogin)
+  const { userInfo } = userLogin
+
   const productList = useSelector(state => state.productList)
   const { products, loading, error } = productList
 
-  const userLogin = useSelector(state => state.userLogin)
-  const { userInfo } = userLogin
+  const productDelete = useSelector(state => state.productDelete)
+  const {
+    success: successDelete,
+    loading: loadingDelete,
+    error: errorDelete
+  } = productDelete
+
 
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
@@ -26,11 +34,11 @@ const ProductListScreen = () => {
       navigate('/login')
     }
 
-  }, [dispatch, navigate, userInfo])
+  }, [dispatch, navigate, userInfo, successDelete])
 
   const deleteHandler = (id) => {
     if (window.confirm('Are you sure?')) {
-      //deleteProduct
+      dispatch(deleteProduct(id))
     }
   }
 
@@ -52,6 +60,8 @@ const ProductListScreen = () => {
           </Button>
         </Col>
       </Row>
+      {loadingDelete && <Loader />}
+      {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
       {loading ? <Loader /> : error ? <Message variant>{error}</Message> : (
         <Table striped bordered hover responsive className='table-sm'>
           <thead>
