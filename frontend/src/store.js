@@ -12,6 +12,7 @@ import orderCreateSlice from './reducers/orderReducers/orderCreateSlice';
 import orderDetailsSlice from './reducers/orderReducers/orderDetailsSlice';
 import orderPaySlice from './reducers/orderReducers/orderPaySlice';
 import orderListMySlice from './reducers/orderReducers/orderListMySlice';
+import userDeleteSlice from './reducers/userReducers/userDeleteSlice';
 const middleware = [thunk]
 
 const store = configureStore({
@@ -23,6 +24,7 @@ const store = configureStore({
     userRegister: userRegisterSlice,
     userDetails: userDetailsSlice,
     userUpdate: userUpdateProfileSlice,
+    userDelete: userDeleteSlice,
     userList: userListSlice,
     orderCreate: orderCreateSlice,
     orderDetails: orderDetailsSlice,
