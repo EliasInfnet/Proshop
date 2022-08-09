@@ -1,24 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const userUpdateProfileSlice = createSlice({
+export const userUpdateSlice = createSlice({
   name: 'userUpdate',
-  initialState: {},
+  initialState: {
+    user: {}
+  },
   reducers: {
-    update_profile_request: (state, action) => {
+    user_update_request: (state, action) => {
       return { loading: true }
     },
-    update_profile_success: (state, action) => {
-      return { loading: false, success: true, userInfo: action.payload }
+    user_update_success: (state, action) => {
+      return { loading: false, success: true }
     },
-    update_profile_fail: (state, action) => {
+    user_update_fail: (state, action) => {
       return { loading: false, error: action.payload }
     },
-    update_profile_reset: (state, action) => {
-      return {}
+    user_update_reset: (state, action) => {
+      return { user: {} }
     }
   }
 })
 
-export const { update_profile_request, update_profile_success, update_profile_fail, update_profile_reset } = userUpdateProfileSlice.actions
+export const { user_update_request, user_update_success, user_update_fail, user_update_reset } = userUpdateSlice.actions
 
-export default userUpdateProfileSlice.reducer
+export default userUpdateSlice.reducer

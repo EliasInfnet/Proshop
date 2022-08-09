@@ -7,7 +7,7 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { getUserDetails, updateUserProfile } from '../actions/userActions'
 import { listMyOrders } from '../actions/ordersActions'
-import { update_profile_reset } from '../reducers/userReducers/userUpdateSlice'
+import { update_profile_reset } from '../reducers/userReducers/userUpdateProfileSlice'
 
 const ProfileScreen = () => {
 
@@ -25,7 +25,7 @@ const ProfileScreen = () => {
   const userLogin = useSelector(state => state.userLogin)
   const { userInfo } = userLogin
 
-  const userUpdateProfile = useSelector(state => state.userUpdate)
+  const userUpdateProfile = useSelector(state => state.userUpdateProfile)
   const { success } = userUpdateProfile
 
   const orderListMy = useSelector(state => state.orderListMy)
