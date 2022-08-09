@@ -7,6 +7,7 @@ import userLoginSlice from './reducers/userReducers/userLoginSlice';
 import userRegisterSlice from './reducers/userReducers/userRegisterSlice';
 import userDetailsSlice from './reducers/userReducers/userDetailsSlice';
 import userUpdateProfileSlice from './reducers/userReducers/userUpdateSlice';
+import userListSlice from './reducers/userReducers/userListSlice';
 import orderCreateSlice from './reducers/orderReducers/orderCreateSlice';
 import orderDetailsSlice from './reducers/orderReducers/orderDetailsSlice';
 import orderPaySlice from './reducers/orderReducers/orderPaySlice';
@@ -22,6 +23,7 @@ const store = configureStore({
     userRegister: userRegisterSlice,
     userDetails: userDetailsSlice,
     userUpdate: userUpdateProfileSlice,
+    userList: userListSlice,
     orderCreate: orderCreateSlice,
     orderDetails: orderDetailsSlice,
     orderPay: orderPaySlice,

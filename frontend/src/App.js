@@ -12,6 +12,7 @@ import ProfileScreen from './screens/ProfileScreen';
 import PaymentScreen from './screens/PaymentScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import OrderScreen from './screens/OrderScreen';
+import UserListScreen from './screens/UserListScreen';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
               <Route index element={<CartScreen />} />
               <Route path=':id' element={<CartScreen />} />
             </Route>
+            <Route path='/admin/userList' element={<UserListScreen />} />
           </Routes>
         </Container>
       </main>

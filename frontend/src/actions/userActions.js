@@ -1,8 +1,9 @@
 import { login_fail, login_request, login_success, logout as logoutSlice } from "../reducers/userReducers/userLoginSlice"
 import { register_request, register_success, register_fail } from "../reducers/userReducers/userRegisterSlice"
 import { details_fail, details_request, details_success, details_reset } from "../reducers/userReducers/userDetailsSlice"
-import { order_list_my_reset } from "../reducers/orderReducers/orderListMySlice"
 import { update_profile_fail, update_profile_request, update_profile_success } from "../reducers/userReducers/userUpdateSlice"
+import { user_list_request, user_list_success, user_list_fail } from "../reducers/userReducers/userListSlice"
+import { order_list_my_reset } from "../reducers/orderReducers/orderListMySlice"
 import axios from 'axios'
 
 export const login = (email, password) => async (dispatch) => {
@@ -130,5 +131,33 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
       err.response.data.message :
       err.message
     dispatch(update_profile_fail(error))
+  }
+}
+
+export const listUsers = () => async (dispatch, getState) => {
+  try {
+    dispatch(user_list_request())
+
+    const { userLogin: { userInfo } } = getState()
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`
+      }
+    }
+
+    const { data } = await axios.get(
+      `/api/users/`,
+      config
+    )
+
+    dispatch(user_list_success(data))
+
+  } catch (err) {
+    const error = err.response &&
+      err.response.data.message ?
+      err.response.data.message :
+      err.message
+    dispatch(user_list_fail(error))
   }
 }
