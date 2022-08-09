@@ -2,7 +2,7 @@ import { login_fail, login_request, login_success, logout as logoutSlice } from 
 import { register_request, register_success, register_fail } from "../reducers/userReducers/userRegisterSlice"
 import { details_fail, details_request, details_success, details_reset } from "../reducers/userReducers/userDetailsSlice"
 import { update_profile_fail, update_profile_request, update_profile_success } from "../reducers/userReducers/userUpdateSlice"
-import { user_list_request, user_list_success, user_list_fail } from "../reducers/userReducers/userListSlice"
+import { user_list_request, user_list_success, user_list_fail, user_list_reset } from "../reducers/userReducers/userListSlice"
 import { order_list_my_reset } from "../reducers/orderReducers/orderListMySlice"
 import axios from 'axios'
 
@@ -40,6 +40,7 @@ export const logout = () => async (dispatch) => {
   dispatch(logoutSlice())
   dispatch(order_list_my_reset())
   dispatch(details_reset())
+  dispatch(user_list_reset())
 }
 
 export const register = (name, email, password) => async (dispatch) => {
