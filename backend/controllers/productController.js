@@ -41,4 +41,32 @@ const deleteProduct = asyncHandler(async (req, res) => {
   }
 })
 
-export {getProducts, getProductById, deleteProduct}
+//@desc Update product
+//@route PUT /api/products/:id
+//@access Private
+const updateProduct = asyncHandler(async (req, res) => {
+  const product = await Product.findById(req.params.id)
+
+  if (product) {
+    product.name = req.body.name || product.name
+    product.price = req.body.price || product.price
+    product.category = req.body.category || product.category
+    product.brand = req.body.brand || product.brand
+
+    const updatedProduct = await product.save()
+
+    res.status(201).json({
+      _id: updatedProduct._id,
+      name: updatedProduct.name,
+      price: updatedProduct.price,
+      category: updatedProduct.category,
+      brand: updatedProduct.brand,
+    })
+
+  } else {
+    res.status(401)
+    throw new Error('Product not found')
+  }
+})
+
+export {getProducts, getProductById, deleteProduct, updateProduct}

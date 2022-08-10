@@ -1,39 +1,44 @@
 import { configureStore } from '@reduxjs/toolkit'
 import thunk from 'redux-thunk';
-import productDetailSlice from './reducers/productReducers/productDetailSlice';
-import productsSlice from './reducers/productReducers/productsSlice';
-import cartSlice from './reducers/cartReducers/cartSlice';
-import userLoginSlice from './reducers/userReducers/userLoginSlice';
-import userRegisterSlice from './reducers/userReducers/userRegisterSlice';
-import userDetailsSlice from './reducers/userReducers/userDetailsSlice';
-import userUpdateSlice from './reducers/userReducers/userUpdateSlice';
-import userUpdateProfileSlice from './reducers/userReducers/userUpdateProfileSlice';
-import userListSlice from './reducers/userReducers/userListSlice';
-import orderCreateSlice from './reducers/orderReducers/orderCreateSlice';
-import orderDetailsSlice from './reducers/orderReducers/orderDetailsSlice';
-import orderPaySlice from './reducers/orderReducers/orderPaySlice';
-import orderListMySlice from './reducers/orderReducers/orderListMySlice';
-import userDeleteSlice from './reducers/userReducers/userDeleteSlice';
-import productDeleteSlice from './reducers/productReducers/productDeleteSlice';
+
+import productDetailReducer from './reducers/productReducers/productDetailSlice';
+import productsReducer from './reducers/productReducers/productsSlice';
+import productDeleteReducer from './reducers/productReducers/productDeleteSlice';
+
+import cartReducer from './reducers/cartReducers/cartSlice';
+
+import userLoginReducer from './reducers/userReducers/userLoginSlice';
+import userRegisterReducer from './reducers/userReducers/userRegisterSlice';
+import userDetailsReducer from './reducers/userReducers/userDetailsSlice';
+import userUpdateReducer from './reducers/userReducers/userUpdateSlice';
+import userUpdateProfileReducer from './reducers/userReducers/userUpdateProfileSlice';
+import userListReducer from './reducers/userReducers/userListSlice';
+import userDeleteReducer from './reducers/userReducers/userDeleteSlice';
+
+import orderCreateReducer from './reducers/orderReducers/orderCreateSlice';
+import orderDetailsReducer from './reducers/orderReducers/orderDetailsSlice';
+import orderPayReducer from './reducers/orderReducers/orderPaySlice';
+import orderListMyReducer from './reducers/orderReducers/orderListMySlice';
+
 const middleware = [thunk]
 
 const store = configureStore({
   reducer: {
-    productList: productsSlice,
-    productDetail: productDetailSlice,
-    productDelete: productDeleteSlice,
-    cart: cartSlice,
-    userLogin: userLoginSlice,
-    userRegister: userRegisterSlice,
-    userDetails: userDetailsSlice,
-    userUpdate: userUpdateSlice,
-    userUpdateProfile: userUpdateProfileSlice,
-    userDelete: userDeleteSlice,
-    userList: userListSlice,
-    orderCreate: orderCreateSlice,
-    orderDetails: orderDetailsSlice,
-    orderPay: orderPaySlice,
-    orderListMy: orderListMySlice
+    productList: productsReducer,
+    productDetail: productDetailReducer,
+    productDelete: productDeleteReducer,
+    cart: cartReducer,
+    userLogin: userLoginReducer,
+    userRegister: userRegisterReducer,
+    userDetails: userDetailsReducer,
+    userUpdate: userUpdateReducer,
+    userUpdateProfile: userUpdateProfileReducer,
+    userDelete: userDeleteReducer,
+    userList: userListReducer,
+    orderCreate: orderCreateReducer,
+    orderDetails: orderDetailsReducer,
+    orderPay: orderPayReducer,
+    orderListMy: orderListMyReducer
   },
   preloadedState: {},
   middleware

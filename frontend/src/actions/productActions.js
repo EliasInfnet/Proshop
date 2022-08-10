@@ -1,15 +1,27 @@
-import { request, success, fail } from "../reducers/productReducers/productsSlice"
-import { product_delete_request, product_delete_success, product_delete_fail } from "../reducers/productReducers/productDeleteSlice"
 import axios from "axios"
+import { products_request, products_success, products_fail } from "../reducers/productReducers/productsSlice"
+import { product_delete_request, product_delete_success, product_delete_fail } from "../reducers/productReducers/productDeleteSlice"
+import { product_details_request, product_details_success, product_details_fail } from "../reducers/productReducers/productDetailSlice"
+
+export const listProductDetails = (id) => async (dispatch) => {
+  try {
+    dispatch(product_details_request())
+    const { data } = await axios.get(`/api/products/${id}`)
+    dispatch(product_details_success(data))
+  } catch (err) {
+    const error = err.response && err.response.data.message ? err.response.data.message : err.message
+    dispatch(product_details_fail(error))
+  }
+}
 
 export const listProducts = () => async (dispatch) => {
   try {
-    dispatch(request())
+    dispatch(products_request())
     const { data } = await axios.get('/api/products')
-    dispatch(success(data))
+    dispatch(products_success(data))
   } catch (err) {
     const error = err.response && err.response.data.message ? err.response.data.message : err.message
-    dispatch(fail(error))
+    dispatch(products_fail(error))
   }
 }
 
@@ -28,9 +40,9 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
 
     await axios.delete(`/api/products/${id}`, config)
     dispatch(product_delete_success())
-    
+
   } catch (err) {
     const error = err.response && err.response.data.message ? err.response.data.message : err.message
-    dispatch(fail(error))
+    dispatch(product_delete_fail(error))
   }
 }

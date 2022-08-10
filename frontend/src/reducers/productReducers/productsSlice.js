@@ -6,30 +6,18 @@ export const productsSlice = createSlice({
     products: []
   },
   reducers: {
-    request: (state, action) => {
+    products_request: (state, action) => {
       return { loading: true, products: [] }
     },
-    success: (state, action) => {
+    products_success: (state, action) => {
       return { loading: false, products: action.payload }
     },
-    fail: (state, action) => {
+    products_fail: (state, action) => {
       return { loading: false, error: action.payload }
     }
   }
 })
 
-export const {request, success, fail} = productsSlice.actions
+export const {products_request, products_success, products_fail} = productsSlice.actions
 
 export default productsSlice.reducer
-// export const productListReducer = (state , action) => {
-//   switch (action.type) {
-//     case 'PRODUCT_LIST_REQUEST':
-//       return { loading: true, products: [] }
-//     case 'PRODUCT_LIST_SUCCESS':
-//       return { loading: false, products: action.payload }
-//     case 'PRODUCT_LIST_FAIL':
-//       return { loading: false, error: action.payload }
-//     default:
-//       return state
-//   }
-// }

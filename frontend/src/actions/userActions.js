@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { order_list_my_reset } from "../reducers/orderReducers/orderListMySlice"
 import { login_fail, login_request, login_success, logout as logoutSlice } from "../reducers/userReducers/userLoginSlice"
-import { register_request, register_success, register_fail } from "../reducers/userReducers/userRegisterSlice"
-import { details_fail, details_request, details_success, details_reset } from "../reducers/userReducers/userDetailsSlice"
+import { user_register_request, user_register_success, user_register_fail } from "../reducers/userReducers/userRegisterSlice"
+import { user_details_request, user_details_success, user_details_fail, user_details_reset } from "../reducers/userReducers/userDetailsSlice"
 import { update_profile_fail, update_profile_request, update_profile_success } from "../reducers/userReducers/userUpdateProfileSlice"
 import { user_list_request, user_list_success, user_list_fail, user_list_reset } from "../reducers/userReducers/userListSlice"
 import { user_delete_request, user_delete_success, user_delete_fail } from "../reducers/userReducers/userDeleteSlice"
@@ -42,13 +42,13 @@ export const logout = () => async (dispatch) => {
   localStorage.removeItem('userInfo')
   dispatch(logoutSlice())
   dispatch(order_list_my_reset())
-  dispatch(details_reset())
+  dispatch(user_details_reset())
   dispatch(user_list_reset())
 }
 
 export const register = (name, email, password) => async (dispatch) => {
   try {
-    dispatch(register_request())
+    dispatch(user_register_request())
 
     const config = {
       headers: {
@@ -62,7 +62,7 @@ export const register = (name, email, password) => async (dispatch) => {
       config
     )
 
-    dispatch(register_success(data))
+    dispatch(user_register_success(data))
     dispatch(login_success(data))
 
     localStorage.setItem('userInfo', JSON.stringify(data))
@@ -72,13 +72,13 @@ export const register = (name, email, password) => async (dispatch) => {
       err.response.data.message ?
       err.response.data.message :
       err.message
-    dispatch(register_fail(error))
+    dispatch(user_register_fail(error))
   }
 }
 
 export const getUserDetails = (id) => async (dispatch, getState) => {
   try {
-    dispatch(details_request())
+    dispatch(user_details_request())
 
     const { userLogin: { userInfo } } = getState()
 
@@ -94,14 +94,14 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
       config
     )
 
-    dispatch(details_success(data))
+    dispatch(user_details_success(data))
 
   } catch (err) {
     const error = err.response &&
       err.response.data.message ?
       err.response.data.message :
       err.message
-    dispatch(details_fail(error))
+    dispatch(user_details_fail(error))
   }
 }
 
@@ -215,7 +215,7 @@ export const updateUser = (user) => async (dispatch, getState) => {
     )
 
     dispatch(user_update_success())
-    dispatch(details_success(data))
+    dispatch(user_details_success(data))
 
 
     localStorage.setItem('userInfo', JSON.stringify(data))

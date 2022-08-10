@@ -6,21 +6,21 @@ export const userDetailsSlice = createSlice({
     user: {}
   },
   reducers: {
-    details_request: (state, action) => {
+    user_details_request: (state, action) => {
       return { ...state, loading: true }
     },
-    details_success: (state, action) => {
+    user_details_success: (state, action) => {
       return { loading: false, user: action.payload }
     },
-    details_fail: (state, action) => {
+    user_details_fail: (state, action) => {
       return { loading: false, error: action.payload }
     },
-    details_reset: (state, action) => {
+    user_details_reset: (state, action) => {
       return { user: {} }
     }
   }
 })
 
-export const { details_request, details_success, details_fail, details_reset } = userDetailsSlice.actions
+export const { user_details_request, user_details_success, user_details_fail, user_details_reset } = userDetailsSlice.actions
 
 export default userDetailsSlice.reducer
