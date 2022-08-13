@@ -6,7 +6,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import FormContainter from '../components/FormContainter'
-import { listProducts, deleteProduct } from '../actions/productActions'
+import { listProducts, deleteProduct, createProduct } from '../actions/productActions'
+import { product_create_reset } from '../reducers/productReducers/productCreateSlice'
 
 const ProductListScreen = () => {
 
@@ -26,15 +27,29 @@ const ProductListScreen = () => {
     error: errorDelete
   } = productDelete
 
+  const productCreate = useSelector(state => state.productCreate)
+  const {
+    success: successCreate,
+    loading: loadingCreate,
+    error: errorCreate,
+    product: createdProduct
+  } = productCreate
+
 
   useEffect(() => {
-    if (userInfo && userInfo.isAdmin) {
-      dispatch(listProducts())
-    } else {
+    dispatch(product_create_reset())
+
+    if (!userInfo.isAdmin) {
       navigate('/login')
     }
 
-  }, [dispatch, navigate, userInfo, successDelete])
+    if (successCreate) {
+      navigate(`/admin/product/${createdProduct._id}/edit`)
+    } else {
+      dispatch(listProducts())
+    }
+
+  }, [dispatch, navigate, userInfo, successDelete, successCreate, createdProduct])
 
   const deleteHandler = (id) => {
     if (window.confirm('Are you sure?')) {
@@ -43,9 +58,7 @@ const ProductListScreen = () => {
   }
 
   const createProductHandler = () => {
-    if (window.confirm('Are you sure?')) {
-      //deleteProduct
-    }
+    dispatch(createProduct())
   }
 
   return (
@@ -62,6 +75,8 @@ const ProductListScreen = () => {
       </Row>
       {loadingDelete && <Loader />}
       {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
+      {loadingCreate && <Loader />}
+      {errorCreate && <Message variant='danger'>{errorCreate}</Message>}
       {loading ? <Loader /> : error ? <Message variant>{error}</Message> : (
         <Table striped bordered hover responsive className='table-sm'>
           <thead>

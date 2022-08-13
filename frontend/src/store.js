@@ -4,6 +4,7 @@ import thunk from 'redux-thunk';
 import productDetailReducer from './reducers/productReducers/productDetailSlice';
 import productsReducer from './reducers/productReducers/productsSlice';
 import productDeleteReducer from './reducers/productReducers/productDeleteSlice';
+import productCreateReducer from './reducers/productReducers/productCreateSlice';
 
 import cartReducer from './reducers/cartReducers/cartSlice';
 
@@ -27,6 +28,7 @@ const store = configureStore({
     productList: productsReducer,
     productDetail: productDetailReducer,
     productDelete: productDeleteReducer,
+    productCreate: productCreateReducer,
     cart: cartReducer,
     userLogin: userLoginReducer,
     userRegister: userRegisterReducer,
