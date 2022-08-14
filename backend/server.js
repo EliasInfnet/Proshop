@@ -1,5 +1,6 @@
 import express from 'express'
 import dotenv from 'dotenv'
+import colors from 'colors'
 import path from 'path'
 import connectDB from './config/db.js'
 import { notFound, errorHanlder } from './middleware/errorMiddleware.js'
@@ -25,6 +26,7 @@ app.get('/api/config/paypal', (req, res) =>
 
 const __dirname = path.resolve()
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
+
 app.use(notFound)
 app.use(errorHanlder)
 
