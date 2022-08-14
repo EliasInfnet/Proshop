@@ -3,6 +3,7 @@ import { order_create_request, order_create_success, order_create_fail } from ".
 import { order_details_request, order_details_success, order_details_fail } from "../reducers/orderReducers/orderDetailsSlice";
 import { order_pay_request, order_pay_success, order_pay_fail } from "../reducers/orderReducers/orderPaySlice";
 import { order_list_my_request, order_list_my_success, order_list_my_fail } from "../reducers/orderReducers/orderListMySlice";
+import { order_list_request, order_list_success, order_list_fail } from "../reducers/orderReducers/orderListSlice";
 
 export const createOrder = (order) => async (dispatch, getState) => {
   try {
@@ -116,5 +117,32 @@ export const listMyOrders = () => async (dispatch, getState) => {
         : error.message
 
     dispatch(order_list_my_fail(message))
+  }
+}
+
+export const listOrders = () => async (dispatch, getState) => {
+  try {
+    dispatch(order_list_request())
+
+    const {
+      userLogin: { userInfo },
+    } = getState()
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    }
+
+    const { data } = await axios.get(`/api/orders`, config)
+
+    dispatch(order_list_success(data))
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message
+
+    dispatch(order_list_fail(message))
   }
 }
