@@ -20,6 +20,7 @@ import userDeleteReducer from './reducers/userReducers/userDeleteSlice';
 import orderCreateReducer from './reducers/orderReducers/orderCreateSlice';
 import orderDetailsReducer from './reducers/orderReducers/orderDetailsSlice';
 import orderPayReducer from './reducers/orderReducers/orderPaySlice';
+import orderDeliverReducer from './reducers/orderReducers/orderDeliverSlice';
 import orderListMyReducer from './reducers/orderReducers/orderListMySlice';
 import orderListReducer from './reducers/orderReducers/orderListSlice';
 
@@ -43,6 +44,7 @@ const store = configureStore({
     orderCreate: orderCreateReducer,
     orderDetails: orderDetailsReducer,
     orderPay: orderPayReducer,
+    orderDeliver: orderDeliverReducer,
     orderListMy: orderListMyReducer,
     orderList: orderListReducer
   },
