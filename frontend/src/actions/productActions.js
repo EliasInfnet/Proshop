@@ -4,7 +4,7 @@ import { product_delete_request, product_delete_success, product_delete_fail } f
 import { product_details_request, product_details_success, product_details_fail } from "../reducers/productReducers/productDetailSlice"
 import { product_create_request, product_create_success, product_create_fail } from "../reducers/productReducers/productCreateSlice"
 import { product_update_request, product_update_success, product_update_fail } from "../reducers/productReducers/productUpdateSlice"
-import { product_create_review_request,product_create_review_success,product_create_review_fail } from "../reducers/productReducers/productReviewCreateSlice"
+import { product_create_review_request, product_create_review_success, product_create_review_fail } from "../reducers/productReducers/productReviewCreateSlice"
 
 
 export const listProductDetails = (id) => async (dispatch) => {
@@ -18,10 +18,10 @@ export const listProductDetails = (id) => async (dispatch) => {
   }
 }
 
-export const listProducts = () => async (dispatch) => {
+export const listProducts = (keyword = '') => async (dispatch) => {
   try {
     dispatch(products_request())
-    const { data } = await axios.get('/api/products')
+    const { data } = await axios.get(`/api/products?keyword=${keyword}`)
     dispatch(products_success(data))
   } catch (err) {
     const error = err.response && err.response.data.message ? err.response.data.message : err.message
