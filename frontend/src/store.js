@@ -7,6 +7,7 @@ import productDeleteReducer from './reducers/productReducers/productDeleteSlice'
 import productCreateReducer from './reducers/productReducers/productCreateSlice';
 import productUpdateReducer from './reducers/productReducers/productUpdateSlice';
 import productReviewCreateReducer from './reducers/productReducers/productReviewCreateSlice';
+import productTopRatedReducer from './reducers/productReducers/productTopRatedSlice';
 
 import cartReducer from './reducers/cartReducers/cartSlice';
 
@@ -35,6 +36,7 @@ const store = configureStore({
     productCreate: productCreateReducer,
     productUpdate: productUpdateReducer,
     productReviewCreate: productReviewCreateReducer,
+    productTopRated: productTopRatedReducer,
     cart: cartReducer,
     userLogin: userLoginReducer,
     userRegister: userRegisterReducer,

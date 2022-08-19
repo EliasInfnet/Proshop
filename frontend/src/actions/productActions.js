@@ -5,6 +5,7 @@ import { product_details_request, product_details_success, product_details_fail 
 import { product_create_request, product_create_success, product_create_fail } from "../reducers/productReducers/productCreateSlice"
 import { product_update_request, product_update_success, product_update_fail } from "../reducers/productReducers/productUpdateSlice"
 import { product_create_review_request, product_create_review_success, product_create_review_fail } from "../reducers/productReducers/productReviewCreateSlice"
+import { product_top_request, product_top_success, product_top_fail } from "../reducers/productReducers/productTopRatedSlice"
 
 
 export const listProductDetails = (id) => async (dispatch) => {
@@ -115,5 +116,16 @@ export const createProductReview = (productId, review) => async (dispatch, getSt
   } catch (err) {
     const error = err.response && err.response.data.message ? err.response.data.message : err.message
     dispatch(product_create_review_fail(error))
+  }
+}
+
+export const listTopProducts = (keyword = '', pageNumber = '') => async (dispatch) => {
+  try {
+    dispatch(product_top_request())
+    const { data } = await axios.get(`/api/products/top`)
+    dispatch(product_top_success(data))
+  } catch (err) {
+    const error = err.response && err.response.data.message ? err.response.data.message : err.message
+    dispatch(product_top_fail(error))
   }
 }
