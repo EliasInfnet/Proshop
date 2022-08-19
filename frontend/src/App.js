@@ -26,7 +26,12 @@ function App() {
         <Container>
           <Routes>
             <Route path='/' element={<HomeScreen />} />
-            <Route path='/search/:keyword' element={<HomeScreen />} />
+            <Route path='/page/:pageNumber' element={<HomeScreen />} />
+            <Route path='/search/:keyword' exact element={<HomeScreen />} />
+            <Route
+              path='/search/:keyword/page/:pageNumber'
+              element={<HomeScreen />}
+            />
             <Route path='/login' element={<LoginScreen />} />
             <Route path='/register' element={<RegisterScreen />} />
             <Route path='/profile' element={<ProfileScreen />} />
@@ -41,7 +46,8 @@ function App() {
             </Route>
             <Route path='/admin/userList' element={<UserListScreen />} />
             <Route path='/admin/user/:id/edit' element={<UserEditScreen />} />
-            <Route path='/admin/productList' element={<ProductListScreen />} />
+            <Route path='/admin/productList' exact element={<ProductListScreen />} />
+            <Route path='/admin/productList/:pageNumber' exact element={<ProductListScreen />} />
             <Route path='/admin/product/:id/edit' element={<ProductEditScreen />} />
             <Route path='/admin/orderlist' element={<OrderListScreen />} />
 

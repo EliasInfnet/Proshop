@@ -18,10 +18,10 @@ export const listProductDetails = (id) => async (dispatch) => {
   }
 }
 
-export const listProducts = (keyword = '') => async (dispatch) => {
+export const listProducts = (keyword = '', pageNumber = '') => async (dispatch) => {
   try {
     dispatch(products_request())
-    const { data } = await axios.get(`/api/products?keyword=${keyword}`)
+    const { data } = await axios.get(`/api/products?keyword=${keyword}&pageNumber=${pageNumber}`)
     dispatch(products_success(data))
   } catch (err) {
     const error = err.response && err.response.data.message ? err.response.data.message : err.message
